@@ -1,0 +1,18 @@
+EX07     START 0            Nacalo programmy                                   
+         BALR  RBASE,0      Zagruzit' registr bazy                             
+         USING *,RBASE      Naznacit' registr bazoy                            
+         LH    3,B          Zagruzka peremennoy v registr                      
+         LH    4,A          Formirovanye promezutocnogo znacenya               
+         OR    3,4          Logicheskoye ILI registrov                         
+         SLL   3,2          Sdvig operanda vlevo                               
+         LH    4,TMP        Zagruzka maski v reg                               
+         NR    3,4          Logiceskoye I registr                              
+         STH   3,C          Formirovanye znacenya logic.virazenya              
+         BCR   15,RVIX      Vyhod iz programmy                                 
+A        DC    BL2'10'                                                         
+B        DC    BL2'101'                                                        
+C        DS    BL2                                                             
+TMP      DC    BL2'111'                                                        
+RBASE    EQU   5                                                               
+RVIX     EQU   14                                                              
+         END   EX07         Konec programmy                                    

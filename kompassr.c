@@ -299,43 +299,28 @@ int FDC() /*подпр.обр.пс.опер.DC    */
 {
 	if (PRNMET == 'Y') /*если псевдооп.DC помеч.,*/
 	{ /*то:                     */
-		if /* если псевдооперация DC */
-		( /* определяет константу   */
-		TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F'/* типа F, то выполнить   */
-		) /* следующее:             */
-		{
-			//if(CHADR == 40)
-			//	CHADR = CHADR - 8;
-
-			T_SYM[ITSYM].DLSYM = 4; /*  уст.длину симв. =  4, */
-			T_SYM[ITSYM].PRPER = 'R'; /*  а,призн.перемест.='R' */
-			if (CHADR % 4) /*  и, если CHADR не указ.*/
-			{ /*  на границу слова, то: */
-				CHADR = (CHADR / 4 + 1) * 4; /*   уст.CHADR на гр.сл. и*/
-				//CHADR = CHADR + 8;
-				T_SYM[ITSYM].ZNSYM = CHADR; /*   запомн. в табл.симв. */
-			}
-			PRNMET = 'N'; /*  занулить PRNMET зн.'N'*/
-		} else
-			return (1); /* иначе выход по ошибке  */
+//		if /* если псевдооперация DC */
+//		( /* определяет константу   */
+//		TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F'/* типа F, то выполнить   */
+//		) /* следующее:             */
+//		{
+//			//if(CHADR == 40)
+//			//	CHADR = CHADR - 8;
+//
+//			T_SYM[ITSYM].DLSYM = 4; /*  уст.длину симв. =  4, */
+//			T_SYM[ITSYM].PRPER = 'R'; /*  а,призн.перемест.='R' */
+//			if (CHADR % 4) /*  и, если CHADR не указ.*/
+//			{ /*  на границу слова, то: */
+//				CHADR = (CHADR / 4 + 1) * 4; /*   уст.CHADR на гр.сл. и*/
+//				//CHADR = CHADR + 8;
+//				T_SYM[ITSYM].ZNSYM = CHADR; /*   запомн. в табл.симв. */
+//			}
+//			PRNMET = 'N'; /*  занулить PRNMET зн.'N'*/
+//		} else
+//			return (1); /* иначе выход по ошибке  */
 	} else /*если же псевдооп.непомеч*/
 	{
-		if /* если псевдооперация DC */
-		( /* определяет константу   */
-		TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F'/* типа F, то выполнить   */
-		) /* следующее:             */
-		{
-			T_SYM[ITSYM].DLSYM = 4; /*  уст.длину симв. =  4, */
-			T_SYM[ITSYM].PRPER = 'R'; /*  а,призн.перемест.='R' */
-			if (CHADR % 4) /*  и, если CHADR не указ.*/
-			{ /*  на границу слова, то: */
-				CHADR = (CHADR / 4 + 1) * 4; /*   уст.CHADR на гр.сл. и*/
-				//CHADR = CHADR + 8;
-				T_SYM[ITSYM].ZNSYM = CHADR; /*   запомн. в табл.симв. */
-			}
-			PRNMET = 'N'; /*  занулить PRNMET зн.'N'*/
-		}
-		else if
+		if
 		(
 		(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'B') &&
 		(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[1] == 'L') &&
@@ -368,21 +353,21 @@ int FDS() /*подпр.обр.пс.опер.DS    */
 {
 	if (PRNMET == 'Y') /*если псевдооп.DC помеч.,*/
 	{ /*то:                     */
-		if /* если псевдооперация DC */
-		( /* определяет константу   */
-		TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F'/* типа F, то выполнить   */
-		) /* следующее:             */
-		{
-			T_SYM[ITSYM].DLSYM = 4; /*  уст.длину симв. =  2, */
-			T_SYM[ITSYM].PRPER = 'R'; /*  а,призн.перемест.='R' */
-			if (CHADR % 4) /*  и, если CHADR не указ.*/
-			{ /*  на границу слова, то: */
-				CHADR = (CHADR / 4 + 1) * 4; /*   уст.CHADR на гр.сл. и*/
-				T_SYM[ITSYM].ZNSYM = CHADR; /*   запомн. в табл.симв. */
-			}
-			PRNMET = 'N'; /*  занулить PRNMET зн.'N'*/
-		} else
-			return (1); /* иначе выход по ошибке  */
+//		if /* если псевдооперация DC */
+//		( /* определяет константу   */
+//		TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F'/* типа F, то выполнить   */
+//		) /* следующее:             */
+//		{
+//			T_SYM[ITSYM].DLSYM = 4; /*  уст.длину симв. =  2, */
+//			T_SYM[ITSYM].PRPER = 'R'; /*  а,призн.перемест.='R' */
+//			if (CHADR % 4) /*  и, если CHADR не указ.*/
+//			{ /*  на границу слова, то: */
+//				CHADR = (CHADR / 4 + 1) * 4; /*   уст.CHADR на гр.сл. и*/
+//				T_SYM[ITSYM].ZNSYM = CHADR; /*   запомн. в табл.симв. */
+//			}
+//			PRNMET = 'N'; /*  занулить PRNMET зн.'N'*/
+//		} else
+//			return (1); /* иначе выход по ошибке  */
 	} else /*если же псевдооп.непомеч*/
 	{
 		if
@@ -528,25 +513,6 @@ int SDC() /*подпр.обр.пс.опер.DC    */
 
 	if ( /* если операнд начинается*/
 	!memcmp(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND,/* с комбинации           */
-			"F'", 2) /* F',                    */
-	) /* то                     */
-	{
-		//if(TEK_ISX_KARTA.STRUCT_BUFCARD.METKA[0] == 'A')
-		//	STXT(8); /*формирование TXT-карты  */
-
-		RAB = strtok /*в перем. c указат.RAB   */
-		( /*выбираем первую лексему */
-		(char*) TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND + 2,/*операнда текущей карты  */
-		"'" /*исх.текста АССЕМБЛЕРА   */
-		);
-
-		RX.OP_RX.B2D2 = atoi(RAB); /*перевод ASCII-> int     */
-		//RX.OP_RX.R1X2 = atoi(RAB); /*перевод ASCII-> int     */
-		RAB = (char *) &RX.OP_RX.B2D2; /*приведение к соглашениям*/
-		//RAB = (char *) &RX.OP_RX.R1X2; /*приведение к соглашениям*/
-		swab(RAB, RAB, 2); /* ЕС ЭВМ                 */
-	} else if ( /* если операнд начинается*/
-	!memcmp(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND,/* с комбинации           */
 			"BL2'", 4) /* BL2',                    */
 	) /* то                     */
 	{
@@ -594,11 +560,7 @@ int SDS() /*подпр.обр.пс.опер.DS    */
 	RX.OP_RX.OP = 0; /*занулим два старших     */
 	RX.OP_RX.R1X2 = 0; /*байта RX.OP_RX          */
 
-	if ( /* если операнд начинается*/
-	TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'F' /* с комбинации F'        */
-	) /* то:                    */
-		RX.OP_RX.B2D2 = 0; /*занулим RX.OP_RX.B2D2   */
-	else if (
+	if (
 	(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'B') &&
 	(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[1] == 'L') &&
 	(TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[2] == '2')

@@ -1,0 +1,7 @@
+ex07:proc options(main);
+     dcl A bit (3) init ('10'B);
+     dcl B bit (3) init ('101'B);
+     dcl C bit (16);
+     C = substr((B !! A), 2, 3);
+end ex07;
+

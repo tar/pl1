@@ -560,6 +560,14 @@ int my_substr (char *ipe1, char *ipe2, char *shift, char *mask) {
      pImpPart++;
      
     memset(&s1[0], ' ', 80);
+    memcpy(&s1[9], "SRL", 3);
+    memcpy(&s1[15], "4,", 2);
+    memcpy(&s1[20], "3", 1);
+    memcpy(&s1[30], "Sdvig operanda vpravo", 21);
+    memcpy(&ImpPart[pImpPart][0], &s1[0], 80);
+     pImpPart++;
+     
+    memset(&s1[0], ' ', 80);
     memcpy(&s1[9], "OR", 2);
     memcpy(&s1[15], "3,", 2);
     memcpy(&s1[20], "4", 1);
@@ -570,7 +578,9 @@ int my_substr (char *ipe1, char *ipe2, char *shift, char *mask) {
     memset(&s1[0], ' ', 80);
     memcpy(&s1[9], "SLL", 3);
     memcpy(&s1[15], "3,", 2);
-    memcpy(&s1[20], shift, strlen(shift));
+    char realShift[15];
+    snprintf(realShift, 15, "%d", atoi(shift)-1);
+    memcpy(&s1[20], realShift, strlen(realShift));
     memcpy(&s1[30], "Sdvig operanda vlevo", 20);
     memcpy(&ImpPart[pImpPart][0], &s1[0], 80);
      pImpPart++;

@@ -1525,19 +1525,19 @@ int LVI2() {
 							36);
 					ZKARD(); /* запоминание ассемблеровской операции       */
 //
-//					/* формируем:             */
-//					memcpy(ASS_CARD._BUFCARD.OPERAC, "SRL", 3);/* формируем код ассембле-*/
-//					strcpy(ASS_CARD._BUFCARD.OPERAND, /* - первый операнд ассем-*/
-//							"4,");/*блеровской операции;    */
-//					strcat(ASS_CARD._BUFCARD.OPERAND, /* - второй операнд ассем-*/
-//							"3"); //FORMT[IFORMT - 1]);/*блеровской операции;    */
-//					ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)]
-//							= /* - разделяющий пробел;  */
-//							' ';
-//					memcpy(ASS_CARD._BUFCARD.COMM,
-//							"Sdvig operanda vpravo",/* - построчный коментарий*/
-//							21);
-//					ZKARD(); /* запоминание ассемблеровской операции       */
+					/* формируем:             */
+					memcpy(ASS_CARD._BUFCARD.OPERAC, "SRL", 3);/* формируем код ассембле-*/
+					strcpy(ASS_CARD._BUFCARD.OPERAND, /* - первый операнд ассем-*/
+							"4,");/*блеровской операции;    */
+					strcat(ASS_CARD._BUFCARD.OPERAND, /* - второй операнд ассем-*/
+							"3"); //FORMT[IFORMT - 1]);/*блеровской операции;    */
+					ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)]
+							= /* - разделяющий пробел;  */
+							' ';
+					memcpy(ASS_CARD._BUFCARD.COMM,
+							"Sdvig operanda vpravo",/* - построчный коментарий*/
+							21);
+					ZKARD(); /* запоминание ассемблеровской операции       */
 
 					/* формируем:             */
 					memcpy(ASS_CARD._BUFCARD.OPERAC, "OR", 2);/* формируем код ассембле-*/
@@ -2099,7 +2099,7 @@ int SUS2() {
 	strcpy(ASS_CARD._BUFCARD.OPERAND, /* - первый операнд ассем-*/
 			"3,");/*блеровской операции;    */
 	strcat(ASS_CARD._BUFCARD.OPERAND, /* - второй операнд ассем-*/
-			"2"); //FORMT[IFORMT - 1]);/*блеровской операции;    */
+			"1"); //FORMT[IFORMT - 1]);/*блеровской операции;    */
 	ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)]
 			= /* - разделяющий пробел;  */
 			' ';

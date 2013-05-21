@@ -145,8 +145,8 @@ struct TMOP                     /*структ.стр.табл.маш.опер*/
 { { 'L', 'H', ' ', ' ', ' ' }, '\x48', 4, FRX },                     /*                        */
 { { 'S', 'R', 'L', ' ', ' ' }, '\x01', 4, FRX },                     /*                        */
 { { 'S', 'L', 'L', ' ', ' ' }, '\x02', 4, FRX },                     /*                        */
-{ { 'O', 'R', ' ', ' ', ' ' }, '\x16', 4, FRX },                     /*                        */
-{ { 'N', 'R', ' ', ' ', ' ' }, '\x14', 4, FRX },                     /*                        */
+{ { 'O', 'R', ' ', ' ', ' ' }, '\x16', 2, FRR },                     /*                        */
+{ { 'N', 'R', ' ', ' ', ' ' }, '\x14', 2, FRR },                     /*                        */
 { { 'S', 'T', 'H', ' ', ' ' }, '\x40', 4, FRX },                     /*                        */
 };
 
@@ -581,11 +581,10 @@ int SDC()                     /*подпр.обр.пс.опер.DC    */
 		char buf[2] =                     /* получение размера резервируемой памяти */
 		{ TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[2], '\x0' };
 		int bytes = atoi(buf);
-		RX.OP_RX.OP = 0;                     /*занулим два старших     */
-		RX.OP_RX.R1X2 = 0;                     /*байта RX.OP_RX          */
-		RX.OP_RX.B2D2 = 0;                     /*занулим RX.OP_RX.B2D2   */
-		memcpy(RX.BUF_OP_RX, &value, 2);
-		STXT(bytes);
+		RR.OP_RR.OP = 0;                     /*занулим два старших     */
+		RR.OP_RR.R1R2 = 0;                     /*занулим RX.OP_RX.B2D2   */
+		memcpy(RR.BUF_OP_RR, &value, 2);
+		STXT(2);
 	} else
 		return (1);                     /*сообщение об ошибке     */
 
@@ -608,13 +607,12 @@ int SDS()                     /*подпр.обр.пс.опер.DS    */
 	} else if (TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'B'                     /* если операнд начинается*/
 	&& TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[1] == 'L'                     /* с комбинации DL */
 	) {
-		RX.OP_RX.OP = 0;                     /*занулим два старших     */
-		RX.OP_RX.R1X2 = 0;                     /*байта RX.OP_RX          */
-		RX.OP_RX.B2D2 = 0;                     /*занулим RX.OP_RX.B2D2   */
+		RR.OP_RR.OP = 0;                     /*занулим два старших     */
+		RR.OP_RR.R1R2 = 0;
 		char buf[2] =                     /* получение размера резервируемой памяти */
 		{ TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[2], '\x0' };
 		int bytes = atoi(buf);
-		STXT(bytes);                     /*формирование TXT-карты  */
+		STXT(2);                     /*формирование TXT-карты  */
 	} else if (                     /*иначе                   */
 	TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == '0'                     /* если операнд начинается */
 	&& TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[1] == 'H'                     /* с комбинации 0H */
@@ -1212,8 +1210,8 @@ int main(int argc, char **argv)                     /*главная прогр�
 	T_MOP[6].BXPROG = SRX;
 	T_MOP[7].BXPROG = SRX;
 	T_MOP[8].BXPROG = SRX;
-	T_MOP[9].BXPROG = SRX;
-	T_MOP[10].BXPROG = SRX;
+	T_MOP[9].BXPROG = SRR;
+	T_MOP[10].BXPROG = SRR;
 	T_MOP[11].BXPROG = SRX;
 
 	T_POP[0].BXPROG = SDC;                     /*установить указатели    */

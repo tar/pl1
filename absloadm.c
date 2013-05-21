@@ -161,7 +161,7 @@ int P_BCR(void)
     {
       if (R2 != 0)
       {
-        waddstr(wcyan, "переход по адресу = 0 или завершение трассировки программы после нажатия клавиши");
+        waddstr(wcyan, "go to address = 0 or complete program tracking after key pushed");
 	wrefresh(wcyan);
 	ret = 1;
       }
@@ -242,34 +242,43 @@ int P_L()                                         /*  п р о г р а м м а
 int P_LH()                                        /*  п р о г р а м м а     */
 						  /*реализации семантики    */
  {                                                /*команды LH              */
-   int sm;                                        /*рабочая переменная      */
+	int sm;
+		/* Вычисление абсолютного адреса операнда */
+	    ADDR = VR[B] + VR[X] + D;
+		/* Вычисление смещения операнда */
+		sm = (int)(ADDR - I);
+		/* Загрузка операнда на регистр */
+		VR[R1] = OBLZ[BAS_IND + CUR_IND + sm] * 0x100L + OBLZ[BAS_IND + CUR_IND + sm + 1];
 
-   ADDR = VR[B] + VR[X] + D;                      /*вычисление абс.адреса и */
-   sm = (int) ( ADDR - I + 4 );                       /*смещения                */
-   //VR[R1] =                                     /*преобразование содержим.*/
-   // OBLZ[BAS_IND + CUR_IND + sm] * 0x100 +      /*второго операнда к виду,*/
-   // OBLZ[BAS_IND + CUR_IND + sm + 1];           /*принятому в IBM PC, и   */
-						  /*запись в РОН, использ.в */
-						  /*качестве 1-го операнда  */
-
-  VR[R1] =                                          /*преобразование содержим.*/
-    OBLZ[BAS_IND + CUR_IND + sm + 1] * 0x1000000L + /*второго операнда к виду,*/
-    OBLZ[BAS_IND + CUR_IND + sm + 0] * 0x10000L;    /*принятому в IBM PC, и   */
-                                                    /*запись в РОН, использ.в */
-                                                    /*качестве 1-го операнда  */
-
-  int sdvig = (VR[R1] >> 24);
-  sdvig = 8 - sdvig;
-
-  sm = (int) ( ADDR - I + 8 );
-
-  VR[R1] =
-    OBLZ[BAS_IND + CUR_IND + sm + 1] * 0x1000000L + 
-    OBLZ[BAS_IND + CUR_IND + sm + 0] * 0x10000L;
-
-  VR[R1] = (VR[R1] << sdvig);
-
-   return 0;                                      /*успешное заверш.прогр.  */
+		return 0;
+	//   int sm;                                        /*рабочая переменная      */
+//
+//   ADDR = VR[B] + VR[X] + D;                      /*вычисление абс.адреса и */
+//   sm = (int) ( ADDR - I + 4 );                       /*смещения                */
+//   //VR[R1] =                                     /*преобразование содержим.*/
+//   // OBLZ[BAS_IND + CUR_IND + sm] * 0x100 +      /*второго операнда к виду,*/
+//   // OBLZ[BAS_IND + CUR_IND + sm + 1];           /*принятому в IBM PC, и   */
+//						  /*запись в РОН, использ.в */
+//						  /*качестве 1-го операнда  */
+//
+//  VR[R1] =                                          /*преобразование содержим.*/
+//    OBLZ[BAS_IND + CUR_IND + sm + 1] * 0x1000000L + /*второго операнда к виду,*/
+//    OBLZ[BAS_IND + CUR_IND + sm + 0] * 0x10000L;    /*принятому в IBM PC, и   */
+//                                                    /*запись в РОН, использ.в */
+//                                                    /*качестве 1-го операнда  */
+//
+//  int sdvig = (VR[R1] >> 24);
+//  sdvig = 8 - sdvig;
+//
+//  sm = (int) ( ADDR - I + 8 );
+//
+//  VR[R1] =
+//    OBLZ[BAS_IND + CUR_IND + sm + 1] * 0x1000000L +
+//    OBLZ[BAS_IND + CUR_IND + sm + 0] * 0x10000L;
+//
+//  VR[R1] = (VR[R1] << sdvig);
+//
+//   return 0;                                      /*успешное заверш.прогр.  */
  }
 
 /*..........................................................................*/
@@ -537,7 +546,7 @@ int sys(void)
 //нижнее поле
   wmargenta = newwin(1, 80, 24, 0);
   wbkgd(wmargenta, COLOR_PAIR(COLOR_MAGENTA));
-  waddstr(wmargenta, "\"PgUp\",\"PgDn\",\"Up\",\"Down\"->просмотр дампа; \"Enter\"->выполнить очередную команду");
+  waddstr(wmargenta, "\"PgUp\",\"PgDn\",\"Up\",\"Down\"->dump review; \"Enter\"->exec next command");
       
 //строка состояния
   wcyan = newwin(1, 80, 23, 0);
@@ -629,7 +638,7 @@ l0:
   wrefresh(wblue);			//вывод на экран
   wclear(wblue);			//очистка окна регистров
   wind();   
-      
+
   waddstr(wcyan, "gotovnost' vypolnenia operacii s adresom ");
   wprintw(wcyan, "%.06lX", I - T_MOP[k].DLOP);
   waddstr(wcyan, "\n");    				
@@ -637,7 +646,7 @@ l0:
   wclear(wcyan);
 
 WAIT:
-  
+
   CUR_IND = (int)(I - BAS_ADDR);
 
   ch = wgetch(wmargenta);
@@ -807,7 +816,7 @@ CONT1:
   for ( I = 0; I < ISPIS; I++ )                   /*перебирая все собираемые*/
    {      
                                       /*об'ектные файлы,        */
-    if ((fp = fopen(SPISOK[I], "rb" )) ==  NULL)                                          
+    if ((fp = fopen(SPISOK[I], "rb" )) ==  NULL)
       goto ERR3;                                   /*                        */
     else                                          /* иначе:                 */
      {                                          /*                        */

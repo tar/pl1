@@ -335,7 +335,6 @@ int FDC()                     /*подпр.обр.пс.опер.DC    */
 			PRNMET = 'N';
 		} else
 			return (1);                     /* иначе выход по ошибке  */
-		T_SYM[ITSYM].ZNSYM = CHADR;
 		return 0;
 	} else {                     /*если же псевдооп.непомеч*/
 		if (TEK_ISX_KARTA.STRUCT_BUFCARD.OPERAND[0] == 'B'
@@ -354,7 +353,6 @@ int FDC()                     /*подпр.обр.пс.опер.DC    */
 			}
 			PRNMET = 'N';
 		}
-		T_SYM[ITSYM].ZNSYM = CHADR;
 		return (0);
 	}                     /*успешно завершить подпр.*/
 }
@@ -407,14 +405,12 @@ int FDS()                     /*подпр.обр.пс.опер.DS    */
 			PRNMET = 'N';
 		} else
 			return (1);                     /* иначе выход по ошибке  */
-		T_SYM[ITSYM].ZNSYM = CHADR;
 		return 0;
 	} else {                    /*если же псевдооп.непомеч*/
 		if (CHADR % 2)                     /*и CHADR не кратен 2,то: */{
 			CHADR = (CHADR / 2 + 1) * 2;                     /* установ.CHADR на гр.сл.*/
 		}
 	}
-	T_SYM[ITSYM].ZNSYM = CHADR;
 	return (0);
 }
                     /*..........................................................................*/

@@ -212,14 +212,14 @@ void pro()
 void odi(char *ipe, char *rzr, char *lit) {
 
                memset(&s1[0], ' ', 80);
-               memcpy(&s1[9], "DC", 2);
+               memcpy(&s1[0], ipe, strlen(ipe));
+               memcpy(&s1[9], "DS", 2);
                s1[15]='0';
                s1[16]='H';
                memcpy(&DclPart[pDclPart][0], &s1[0], 80);
                pDclPart++;
                
                memset(&s1[0], ' ', 80);
-               memcpy(&s1[0], ipe, strlen(ipe));
                memcpy(&s1[9], "DC", 2);
                char last_ind = 0;
                if(!memcmp(rzr, "31", 2)) {
@@ -260,14 +260,14 @@ void odi(char *ipe, char *rzr, char *lit) {
 void odr(char *ipe, char *rzr) {
 
 			   memset(&s1[0], ' ', 80);
-               memcpy(&s1[9], "DC", 2);
+               memcpy(&s1[0], ipe, strlen(ipe));
+               memcpy(&s1[9], "DS", 2);
                s1[15]='0';
                s1[16]='H';
                memcpy(&DclPart[pDclPart][0], &s1[0], 80);
                pDclPart++;
 
                memset(&s1[0], ' ', 80);
-               memcpy(&s1[0], ipe, strlen(ipe));
                memcpy(&s1[9], "DS", 2);
                if(!memcmp(rzr, "31", 2)) {
                 s1[15]='F';

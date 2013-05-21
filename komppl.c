@@ -1618,7 +1618,7 @@ int OEN2() {
 				SYM[i].INIT[a] = 0;
 
 				if (a == 1) {
-					memcpy(ASS_CARD._BUFCARD.OPERAC, "DC", 2);
+					memcpy(ASS_CARD._BUFCARD.OPERAC, "DS", 2);
 					strcpy(ASS_CARD._BUFCARD.OPERAND, "0H");
 					ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)] =
 							' ';
@@ -1635,7 +1635,7 @@ int OEN2() {
 					"TMP"); /* поле метки псевдооперации DC                 */
 					ASS_CARD._BUFCARD.METKA[strlen(ASS_CARD._BUFCARD.METKA)] =
 							' '; /* пишем разделитель полей*/
-					memcpy(ASS_CARD._BUFCARD.OPERAC, "DC", 2);
+					memcpy(ASS_CARD._BUFCARD.OPERAC, "DS", 2);
 					strcpy(ASS_CARD._BUFCARD.OPERAND, "0H");
 					ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)] =
 							' ';
@@ -1654,7 +1654,7 @@ int OEN2() {
 					//		"Opredelenye peremennoy", 22); /* тария                  */
 					ZKARD(); /* запомнить операцию  Ассемблера          */
 				} else {
-					memcpy(ASS_CARD._BUFCARD.OPERAC, "DC", 2);
+					memcpy(ASS_CARD._BUFCARD.OPERAC, "DS", 2);
 					strcpy(ASS_CARD._BUFCARD.OPERAND, "0H");
 					ASS_CARD._BUFCARD.OPERAND[strlen(ASS_CARD._BUFCARD.OPERAND)] =
 							' ';

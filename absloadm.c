@@ -161,7 +161,7 @@ int BAS_IND;                                      /*индекс масс.обл
       {
         if (R2 != 0)
         {
-          waddstr(wcyan, "переход по адресу = 0 или завершение трассировки программы после нажатия клавиши");
+          waddstr(wcyan, "Go to zero. Complete execution");
   	wrefresh(wcyan);
   	ret = 1;
         }
@@ -204,7 +204,7 @@ int P_STH()                                       /*  п р о г р а м м а
   char bytes[2];                                  /*переменные              */
 
   ADDR = VR[B] + VR[X] + D;                       /*вычисление абс.адреса и */
-  sm = (int) (ADDR -I + 8);                           /*смещения                */
+  sm = (int) (ADDR -I);                           /*смещения                */
 
   bytes[0] = ((VR[R1] % 0x10000L) -               /*преобразование содержим.*/
 		((VR[R1]%0x10000L)%0x100))/0x100; /*РОН, использованного в  */
@@ -302,7 +302,7 @@ int P_SRL()                                         /*  п р о г р а м м 
 						  /*реализации семантики    */
  {                                                /*команды L               */
 
-   int sm = 3;                                        /*рабочая переменная      */
+   int sm = D;                                        /*рабочая переменная      */
 
    VR[R1] = VR[R1] >> sm;                                      /*преобразование содержим.*/
    return 0;                                      /*успешное заверш.прогр.  */                                     /*успешное заверш.прогр.  */
@@ -312,7 +312,7 @@ int P_SLL()                                         /*  п р о г р а м м 
 						  /*реализации семантики    */
  {                                                /*команды L               */
 
-   int sm = 1;                                        /*рабочая переменная      */
+   int sm = D;                                        /*рабочая переменная      */
 
    VR[R1] = VR[R1] << sm;                                      /*преобразование содержим.*/
    return 0;                                      /*успешное заверш.прогр.  */                                     /*успешное заверш.прогр.  */
@@ -405,9 +405,6 @@ int FRX(void)
       
       ADDR = VR[B] + VR[X] + D;
       wprintw(wgreen,"        %.06lX       \n", ADDR);
-//  Hack! In fact, it's not needed here =)
-//      if (ADDR % 4 != 0)
-//        return (7);
       break;
     }
   }
@@ -479,14 +476,14 @@ int sys(void)
 //нижнее поле
   wmargenta = newwin(1, 80, 24, 0);
   wbkgd(wmargenta, COLOR_PAIR(COLOR_MAGENTA));
-  waddstr(wmargenta, "\"PgUp\",\"PgDn\",\"Up\",\"Down\"->просмотр дампа; \"Enter\"->выполнить очередную команду");
+  waddstr(wmargenta, "Use keys to move dump. Enter->execute next command");
       
 //строка состояния
   wcyan = newwin(1, 80, 23, 0);
   wbkgd(wcyan, COLOR_PAIR(COLOR_CYAN));
   
 //дамп области загрузки
-  wred = newwin(8, 67, 15, 0);
+  wred = newwin(8, 66, 15, 0);
   wbkgd(wred, COLOR_PAIR(COLOR_RED));
   
 //поле регистров
@@ -572,7 +569,7 @@ l0:
   wclear(wblue);			//очистка окна регистров
   wind();   
 
-  waddstr(wcyan, "готовность к выполнению очередной команды с адресом ");
+  waddstr(wcyan, "Ready to execute nextcommand with address ");
   wprintw(wcyan, "%.06lX", I - T_MOP[k].DLOP);
   waddstr(wcyan, "\n");    				
   wrefresh(wcyan);

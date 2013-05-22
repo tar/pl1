@@ -957,9 +957,7 @@ int SRX() /*подпр.обр.опер.RX-форм. */
 		}
 		return (2); /*сообщ."необ'явл.идентиф"*/
 	} else if (isdigit(METKA2[0])) {
-		//for example 4 (0, @RRAB)
-		//NBASRG  = T_SYM[J].ZNSYM;
-		NBASRG = 15;
+		NBASRG = 0;
 		DELTA = atoi(&METKA2[0]);
 		B2D2 = NBASRG << 12; /* представление второго  */
 		B2D2 = B2D2 + DELTA; /* операнда в виде B2D2   */
